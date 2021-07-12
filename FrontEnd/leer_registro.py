@@ -1,27 +1,23 @@
 from tkinter import *
 from tkinter import ttk 
+#from Database import connection
+
+import mysql.connector
+
+connection =mysql.connector.connect(host="localhost", 
+                                  user="root", 
+                                  passwd="", 
+                                  database="db_demo")
+
+cursor=connection.cursor()
+cursor.execute("SELECT NOMBRE, EDAD, GENERO FROM TBL_USUARIOS")
+for fila in cursor:
+    print(fila)
+    print(fila[0])
+connection.close() 
 
 window = Tk()
-window.title('Crear Registro')
-
-# Inicializando las variables para almacenar lo que escriba el usuario en las cajas de Texto (Entry)
-id_campo = StringVar()
-campo1 = StringVar()
-campo2 = StringVar()
-campo3 = StringVar()
-
-# Creando función "agregar_sala()", función que se ejecuta la dar clic en el botón "Agregar"
-def crear_sala():
-    # Obteniendo los valores de los widgets Entry mediante la función "GET()" 
-    # y almacenandolos en las variables previamente inicializadas
-    sala = entry_sala.get()
-    butakas = entry_butakas.get()
-    boletos = entry_boletos.get()
-    precio = entry_precio.get()
-    # creando un objeto de la Base de datos "MyDatabase", para acceder a la función "insert_db"
-    cine_db = cine_database.MyDatabase()
-    # ejecutando la función "insert_db" y enviando las variables como parámetros
-    cine_db.insert_db(sala, butakas, boletos, precio)
+window.title('Mostrar Registros')
 
 my_table = ttk.Treeview(window)
 
