@@ -1,6 +1,5 @@
 from tkinter import *
 from tkinter import ttk 
-#from Database import connection
 
 import mysql.connector
 
@@ -9,9 +8,12 @@ connection =mysql.connector.connect(host="localhost",
                                   passwd="", 
                                   database="db_demo")
 
-cursor=connection.cursor()
+cursor = connection.cursor()
 cursor.execute("SELECT NOMBRE, EDAD, GENERO FROM TBL_USUARIOS")
 for fila in cursor:
+    nombre = fila[0]  
+    edad = fila[1]
+    genero = fila[2]  
     print(fila)
     print(fila[0])
 connection.close() 
@@ -40,7 +42,7 @@ my_table.heading('GENERO', text='GENERO', anchor=W)
 my_table.insert(parent='', index='end', iid=0, text='1', 
         values=('Sharon', '17', 'F'))
 my_table.insert(parent='', index='end', iid=1, text='2', 
-        values=('Hector', 'Value 2', 'Value 3')) 
+        values= ( nombre, edad, genero)) 
 my_table.insert(parent='', index='end', iid=3, text='3', 
         values=('Value 1', 'Value 2', 'Value 3'))
 my_table.insert(parent='', index='end', iid=4, text='4', 
