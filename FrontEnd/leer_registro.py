@@ -8,16 +8,6 @@ connection =mysql.connector.connect(host="localhost",
                                   passwd="", 
                                   database="db_demo")
 
-cursor = connection.cursor()
-cursor.execute("SELECT NOMBRE, EDAD, GENERO FROM TBL_USUARIOS")
-for fila in cursor:
-    nombre = fila[0]  
-    edad = fila[1]
-    genero = fila[2]  
-    print(fila)
-    print(fila[0])
-connection.close() 
-
 window = Tk()
 window.title('Mostrar Registros')
 
@@ -39,14 +29,19 @@ my_table.heading('EDAD', text='EDAD', anchor=W)
 my_table.heading('GENERO', text='GENERO', anchor=W)
 
 # Add Data
-my_table.insert(parent='', index='end', iid=0, text='1', 
-        values=('Sharon', '17', 'F'))
-my_table.insert(parent='', index='end', iid=1, text='2', 
-        values= ( nombre, edad, genero)) 
-my_table.insert(parent='', index='end', iid=3, text='3', 
-        values=('Value 1', 'Value 2', 'Value 3'))
-my_table.insert(parent='', index='end', iid=4, text='4', 
-        values=('Value 1', 'Value 2', 'Value 3'))           
+cursor = connection.cursor()
+cursor.execute("SELECT NOMBRE, EDAD, GENERO FROM TBL_USUARIOS")
+registro = 0
+for fila in cursor:
+    registro = registro + 1 
+    print(str(registro) +" - "+ str(fila))
+    nombre = fila[0]  
+    edad = fila[1]
+    genero = fila[2]  
+    my_table.insert(parent='', index='end', iid=registro, text=str(registro), 
+        values=(nombre, edad, genero))
+
+connection.close()         
 
 # Pack to the screen
 my_table.pack(pady=20, padx=20)
