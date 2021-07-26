@@ -29,7 +29,7 @@ class MyDatabase:
         registro = 0
         for fila in cursor:
             data.append(fila) 
-            print(str(registro) +" - "+ str(data[registro]))
+            print('for - ' + str(registro) +" - "+ str(data[registro]))
             registro = registro + 1 
         
         my_connection.close()     

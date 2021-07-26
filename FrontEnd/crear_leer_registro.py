@@ -47,13 +47,22 @@ butakas = StringVar()
 boletos = StringVar()
 precio = StringVar()
 
+registro = "hola mundo"
+
     
 def show_users():
     fila = 0 
     print(fila)
     print('data resultado: ' + str(demo_database.data))
     for user in demo_database.data:
-        print(str(fila) + ' - ' + str(user))
+        registro = user
+        print('variable registro: ' + str(registro))
+        title1 = Label(frame_title, 
+              text=registro, 
+              font=("Century Gothic", "22", "bold"),
+              justify=LEFT)
+        title1.place(x=25, y=10)
+        #print(str(fila) + ' - ' + str(user))
         fila = fila + 1 
 
 # Creando función "agregar_sala()", función que se ejecuta la dar clic en el botón "Agregar"
@@ -88,7 +97,7 @@ title.place(x=250, y=40)
 
 # Widgets dentro del contender TITLE
 title1 = Label(frame_title, 
-              text="SALAS DE CINE", 
+              text=registro, 
               font=("Century Gothic", "22", "bold"),
               justify=LEFT)
 title1.place(x=25, y=10)
